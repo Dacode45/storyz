@@ -1,0 +1,17 @@
+[package]
+name = "gui"
+version = "0.1.0"
+authors = ["David Ayeke"]
+edition = "2018"
+
+[lib]
+name = "gui"
+path = "src/lib.rs"
+
+[[bin]]
+name = "storyz-gui"
+path = "src/bin.rs"
+
+[dependencies]
+stdweb = "0.4.2"
+yew = "0.4"

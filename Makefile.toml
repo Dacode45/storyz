@@ -1,0 +1,45 @@
+[tasks.format]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt", "--all"]
+
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
+
+[task.build_engine]
+command = "cargo"
+args = ["build", "-p", "engine"]
+
+[tasks.build_gui]
+command = "cargo"
+args = ["web", "deploy", "-p", "gui"]
+
+[tasks.start_gui]
+command = "cargo"
+args = ["web", "start", "-p", "gui"]
+
+[tasks.post_start_gui]
+script = [
+    "xdg-open http://localhost:8000"
+]
+
+[tasks.start_electron]
+script = [
+    "rm -r electron/dist",
+    "cp -r target/deploy/ electron/dist",
+    "electron ./electron",
+]
+dependencies = ["build_gui"]
+
+[tasks.test]
+command = "cargo"
+args = ["test"]
+dependencies = ["clean"]
+
+[tasks.my-flow]
+dependencies = [
+    "format",
+    "build",
+    "test"
+]
